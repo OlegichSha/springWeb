@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<body>
+<div class="box3" th:fragment="login">
+    <div class="right-bot-corner">
+        <div class="left-bot-corner">
+            <div class="inner">
+                <h4><b>Форма</b> Входа</h4>
+                <div sec:authorize="!isAuthenticated()">
+                    <form th:action="@{/perform-login}" method="post" id="login-form">
+                        <fieldset>
+                            <div th:if="${param.error}" class="alert alert-error" style="color: #ff0000">
+                                Неправильный логин или пароль.
+                            </div>
+                            <div class="field"><label>Логин:</label>
+                                <input type="text" id="user" name="user"/>
+                            </div>
+                            <div class="field"><label>Пароль:</label>
+                                <input type="password" id="pass" name="pass"/>
+                            </div>
+                            <div class="field1">
+                                <a href="#" onclick="document.getElementById('login-form').submit()">
+                                    <em>
+                                        <b>Вход<span>Вход</span></b>
+                                    </em>
+                                </a>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div sec:authorize="isAuthenticated()">
+                    <form id="logout-form" th:action="@{/logout}" method="post">
+                        <fieldset>
+                            <div class="field1">
+                                <a href="#" onclick="document.getElementById('logout-form').submit()">
+                                    <em>
+                                        <b>Выход<span>Выход</span></b>
+                                    </em>
+                                </a>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
